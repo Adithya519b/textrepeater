@@ -1,102 +1,99 @@
 <!DOCTYPE html>
-    <html>
-      <head>
-          <title>Text Repeater</title>
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html>
+  <head>
+    <title>Text Repeater</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      h1 {
+        color: green;
+        margin: 18px auto;
+        text-align: center;
+      }
 
-        <style>h1{
-    color:green;
-    margin: 18px auto;
-    text-align:center;
+      #input {
+        padding: 10px;
+        margin: 10px auto;
+        width: 50%;
+        background-color: gray;
+        border-radius: 4px;
+        border: none;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
 
-}
-#input {
-  padding: 10px;
-  margin: 10px auto;
-  width: 50%;
-  background-color: gray;
-  border-radius: 4px;
-  border: none;
-  display: flex;
-  flex-direction: column;
-  gap: 10px; /* add spacing instead of wrap */
-}
+      input {
+        font-size: 18px;
+        padding: 10px;
+        border-radius: 4px;
+        border: none;
+      }
 
-input {
-  font-size: 18px;
-  padding: 10px;
-  border-radius: 4px;
-  border: none;
-}
+      textarea {
+        min-height: 120px;
+        font-size: 16px;
+        padding: 10px;
+      }
 
-textarea {
-  min-height: 120px; /* make textarea larger */
-  font-size: 16px;
-  padding: 10px;
-}
+      button {
+        color: white;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 4px;
+        border: none;
+        background-color: green;
+        width: 100px; /* default desktop */
+      }
 
-button {
-  color: white;
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 4px;
-  border: none;
-  width:100px;
-  background-color: green;
-}
+      /* 📱 Mobile adjustments */
+      @media screen and (max-width: 600px) {
+        #input {
+          width: 95% !important;
+          height: auto;
+        }
+        input, textarea, button {
+          width: 100%; /* ✅ buttons also full width */
+          font-size: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Text Repeater</h1>
+    <div id="input">
+      <input type="text" placeholder="Enter Text.." id="text">
+      <input type="number" placeholder="Enter no.of times" id="count">
+      <button id="get">Get</button>
+      <textarea id="show"></textarea>
+      <button id="copy">Copy</button>
+    </div>
 
-/* 📱 Mobile adjustments */
-@media screen and (max-width: 600px) {
-  #input {
-    width: 95% !important;
-    height: auto; /* remove fixed height */
-  }
-  input, textarea {
-    width: 100%; /* take full width */
-    font-size: 16px;
-  }
-}
-  </style>
-      </head>
-      <body>
-        <h1>Text Repeater</h1>
-<div id="input">
-<input type="text" placeholder="Enter Text.."
-id="text">
-<input type="number" placeholder="Enter no.of times"
-id="count">
-<button id="get">Get</button>
- 
-<textarea id="show"></textarea>
-<button id="copy">Copy</button>
-</div>
-        <script>const text = document.getElementById("text");
-const count = document.getElementById("count");
-const show = document.getElementById("show");
-const get = document.getElementById("get");
-const copy = document.getElementById("copy");
+    <script>
+      const text = document.getElementById("text");
+      const count = document.getElementById("count");
+      const show = document.getElementById("show");
+      const get = document.getElementById("get");
+      const copy = document.getElementById("copy");
 
-get.addEventListener("click", () => {
-  const repeatCount = parseInt(count.value);
-  show.value = ''; // Clear previous content
-  if (!isNaN(repeatCount) && repeatCount > 0) {
-    for (let i = 0; i < repeatCount; i++) {
-      show.value += text.value +" ";
-    }
-  } else {
-    show.value = "Please enter a valid number.";
-  }
-});
+      get.addEventListener("click", () => {
+        const repeatCount = parseInt(count.value);
+        show.value = ''; 
+        if (!isNaN(repeatCount) && repeatCount > 0) {
+          for (let i = 0; i < repeatCount; i++) {
+            show.value += text.value + " ";
+          }
+        } else {
+          show.value = "Please enter a valid number.";
+        }
+      });
 
-copy.addEventListener("click", () => {
-  navigator.clipboard.writeText(show.value);
-  copy.textContent = "Copied!";
-
-  setTimeout(() => {
-    copy.textContent = "Copy";
-  }, 1500);
-});
-</script>
-      </body>
-    </html>
-  
+      copy.addEventListener("click", () => {
+        navigator.clipboard.writeText(show.value);
+        copy.textContent = "Copied!";
+        setTimeout(() => {
+          copy.textContent = "Copy";
+        }, 1500);
+      });
+    </script>
+  </body>
+</html>
